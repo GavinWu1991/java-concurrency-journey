@@ -3,7 +3,7 @@ package org.jcj.riskofthread;
 import net.jcip.annotations.NotThreadSafe;
 
 @NotThreadSafe
-public class UnsafeSequence {
+public class UnsafeSequence implements Sequence {
     private int value;
 
     /**
