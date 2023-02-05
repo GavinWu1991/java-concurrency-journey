@@ -17,7 +17,7 @@ class UnsafeSequenceTest {
 
     @Test
     void shouldRaceCondition_WhenMultipleWorkersIncreaseUnsafeSequence() throws InterruptedException {
-        // Given two thread worker will operate same unsafeSequence instance simultaneous
+        // Given multiple thread worker will operate same unsafeSequence instance simultaneous
         UnsafeSequence unsafeSequence = new UnsafeSequence();
 
         List<Thread> threads = IntStream

@@ -17,7 +17,7 @@ class SafeSequenceTest {
 
     @Test
     void shouldNotRaceCondition_WhenMultipleWorkersIncreaseSafeSequence() throws InterruptedException {
-        // Given two thread worker will operate same safeSequence instance simultaneous
+        // Given multiple thread worker will operate same safeSequence instance simultaneous
         SafeSequence safeSequence = new SafeSequence();
 
         List<Thread> threads = IntStream
