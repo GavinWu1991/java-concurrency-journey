@@ -15,17 +15,18 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
+@Execution(ExecutionMode.CONCURRENT)
 class UnsafeSequenceTest {
 
-    private static final int INCREMENT_PER_THREAD = 10000;
+    private static final int INCREMENT_PER_THREAD = 60000;
 
-    private static final int NUMBER_OF_THREAD = 2;
+    private static final int NUMBER_OF_THREAD = Runtime.getRuntime().availableProcessors() * 4;
 
     private static final UnsafeSequence unsafeSequence = new UnsafeSequence();
 
     @Execution(ExecutionMode.CONCURRENT)
     @TestFactory
-    Collection<DynamicTest> givenMultipleWorkersIncreasedSafeSequence() {
+    Collection<DynamicTest> givenMultipleWorkersIncreaseSafeSequence() {
         return IntStream
                 .range(0, NUMBER_OF_THREAD)
                 .mapToObj(UnsafeSequenceTest::buildDynamicTestWorker)

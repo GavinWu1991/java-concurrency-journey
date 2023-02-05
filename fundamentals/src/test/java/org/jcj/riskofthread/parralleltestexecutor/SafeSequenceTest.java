@@ -2,7 +2,10 @@ package org.jcj.riskofthread.parralleltestexecutor;
 
 import org.jcj.riskofthread.SafeSequence;
 import org.jcj.riskofthread.SequenceInvoker;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DynamicTest;
+import org.junit.jupiter.api.TestFactory;
 import org.junit.jupiter.api.parallel.Execution;
 import org.junit.jupiter.api.parallel.ExecutionMode;
 
@@ -14,16 +17,16 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 class SafeSequenceTest {
 
-    private static final int INCREMENT_PER_THREAD = 10000;
+    private static final int INCREMENT_PER_THREAD = 60000;
 
-    private static final int NUMBER_OF_THREAD = 2;
+    private static final int NUMBER_OF_THREAD = Runtime.getRuntime().availableProcessors() * 4;
 
     private static final SafeSequence safeSequence = new SafeSequence();
 
 
     @Execution(ExecutionMode.CONCURRENT)
     @TestFactory
-    Collection<DynamicTest> givenMultipleWorkersIncreasedSafeSequence() {
+    Collection<DynamicTest> givenMultipleWorkersIncreaseSafeSequence() {
         return IntStream
                 .range(0, NUMBER_OF_THREAD)
                 .mapToObj(SafeSequenceTest::buildDynamicTestWorker)
