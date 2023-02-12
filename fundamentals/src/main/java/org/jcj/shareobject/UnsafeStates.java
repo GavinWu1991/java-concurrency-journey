@@ -3,7 +3,7 @@ package org.jcj.shareobject;
 import net.jcip.annotations.NotThreadSafe;
 
 @NotThreadSafe
-public class UnsafeStates {
+public class UnsafeStates implements States {
 
     private String[] states = new String[] {
             "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY",
