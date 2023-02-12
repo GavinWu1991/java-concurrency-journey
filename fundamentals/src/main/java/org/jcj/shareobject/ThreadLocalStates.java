@@ -5,6 +5,10 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.Arrays;
 
+/**
+ * Different from {@link CopyOnGetStates}, this implementation will only copy the state data if a new thread requires the get action
+ * the data will not be copied if the action occurred in the same thread
+ */
 @ThreadSafe
 @Immutable
 public class ThreadLocalStates implements States {
@@ -15,11 +19,8 @@ public class ThreadLocalStates implements States {
             "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
     };
 
-    private final ThreadLocal<String[]> statesHolder = new ThreadLocal<String[]>() {
-        public String[] initialValue() {
-            return Arrays.copyOf(states, states.length);
-        }
-    };
+    private final ThreadLocal<String[]> statesHolder = ThreadLocal
+            .withInitial(() -> Arrays.copyOf(states, states.length));
 
     public String[] getStates() {
         return statesHolder.get();
