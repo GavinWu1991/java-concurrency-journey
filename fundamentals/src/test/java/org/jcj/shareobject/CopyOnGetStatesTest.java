@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 class CopyOnGetStatesTest extends BaseStatesTest{
 
     @Test
-    void shouldNoDataEscape_WhenAccessStateField() throws InterruptedException {
+    void shouldNotsDataEscape_WhenAccessStateField() throws InterruptedException {
         // given an instance of UnsafeStates created and shared to other threads
         CopyOnGetStates copyOnGetStates = new CopyOnGetStates();
 
