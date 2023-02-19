@@ -1,4 +1,4 @@
-package org.jcj.shareobject;
+package org.jcj.ch3.shareobject;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

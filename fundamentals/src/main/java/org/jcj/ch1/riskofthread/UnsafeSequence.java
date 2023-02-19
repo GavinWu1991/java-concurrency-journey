@@ -1,4 +1,4 @@
-package org.jcj.riskofthread;
+package org.jcj.ch1.riskofthread;
 
 import net.jcip.annotations.NotThreadSafe;
 

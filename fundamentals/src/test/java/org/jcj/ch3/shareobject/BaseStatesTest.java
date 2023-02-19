@@ -1,4 +1,4 @@
-package org.jcj.shareobject;
+package org.jcj.ch3.shareobject;
 
 import java.util.List;
 import java.util.stream.Collectors;

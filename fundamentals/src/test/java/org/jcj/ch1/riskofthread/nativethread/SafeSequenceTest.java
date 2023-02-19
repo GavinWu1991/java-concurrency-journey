@@ -1,7 +1,7 @@
-package org.jcj.riskofthread.nativethread;
+package org.jcj.ch1.riskofthread.nativethread;
 
-import org.jcj.riskofthread.SafeSequence;
-import org.jcj.riskofthread.SequenceInvoker;
+import org.jcj.ch1.riskofthread.SafeSequence;
+import org.jcj.ch1.riskofthread.SequenceInvoker;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

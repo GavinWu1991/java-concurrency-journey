@@ -1,4 +1,4 @@
-package org.jcj.riskofthread;
+package org.jcj.ch1.riskofthread;
 
 public class SequenceInvoker {
 
