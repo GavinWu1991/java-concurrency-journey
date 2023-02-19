@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-class CopyOnGetStatesTest extends BaseStatesTest{
+class CopyOnGetStatesTest extends BaseStatesTest {
 
     @Test
     void shouldNotDataEscape_WhenAccessStateField() throws InterruptedException {
@@ -16,7 +16,7 @@ class CopyOnGetStatesTest extends BaseStatesTest{
         modifyStatesInMultipleThread(copyOnGetStates);
 
         // Then states value of the FinalStates instance should be modified which not equals to the original
-        System.out.println("States in copyOnGetStates instance: \n\r"+ Arrays.toString(copyOnGetStates.getStates()));
+        System.out.println("States in copyOnGetStates instance: \n\r" + Arrays.toString(copyOnGetStates.getStates()));
         Assertions.assertArrayEquals(EXPECTED_STATES, copyOnGetStates.getStates());
     }
 

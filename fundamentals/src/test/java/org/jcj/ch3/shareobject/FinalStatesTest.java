@@ -16,7 +16,7 @@ class FinalStatesTest extends BaseStatesTest {
         modifyStatesInMultipleThread(finalStates);
 
         // Then states value of the FinalStates instance should be modified which not equals to the original
-        System.out.println("States in finalStates instance: \n\r"+ Arrays.toString(finalStates.getStates()));
+        System.out.println("States in finalStates instance: \n\r" + Arrays.toString(finalStates.getStates()));
         Assertions.assertNotSame(EXPECTED_STATES, finalStates.getStates());
         // And the count of modified thread should not equal to the real number of thread
         // * because of the race condition

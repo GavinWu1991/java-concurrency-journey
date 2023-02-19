@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
-class ThreadLocalStatesTest extends BaseStatesTest{
+class ThreadLocalStatesTest extends BaseStatesTest {
 
     @Test
     void shouldNotDataEscape_WhenAccessStateField() throws InterruptedException {
@@ -16,7 +16,7 @@ class ThreadLocalStatesTest extends BaseStatesTest{
         modifyStatesInMultipleThread(threadLocalStates);
 
         // Then states value of the threadLocalStates instance should be modified which not equals to the original
-        System.out.println("States in threadLocalStates instance: \n\r"+ Arrays.toString(threadLocalStates.getStates()));
+        System.out.println("States in threadLocalStates instance: \n\r" + Arrays.toString(threadLocalStates.getStates()));
         Assertions.assertArrayEquals(EXPECTED_STATES, threadLocalStates.getStates());
     }
 

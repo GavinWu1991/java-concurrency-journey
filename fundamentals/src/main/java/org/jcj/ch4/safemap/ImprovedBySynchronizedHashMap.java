@@ -10,7 +10,7 @@ import java.util.HashMap;
  * Refer to {@link Collections.SynchronizedMap} to implement this  thread safe map
  */
 @ThreadSafe
-public class ImprovedBySynchronizedHashMap<K, V> extends HashMap<K, V>{
+public class ImprovedBySynchronizedHashMap<K, V> extends HashMap<K, V> {
 
     private final HashMap<K, V> innerMap = new HashMap<>();
 
@@ -22,11 +22,8 @@ public class ImprovedBySynchronizedHashMap<K, V> extends HashMap<K, V>{
         }
     }
 
-    @GuardedBy("innerMap")
     @Override
     public int size() {
-        synchronized (innerMap) {
-            return innerMap.size();
-        }
+        return innerMap.size();
     }
 }
