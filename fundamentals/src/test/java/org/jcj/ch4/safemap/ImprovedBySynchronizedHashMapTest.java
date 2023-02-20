@@ -11,7 +11,7 @@ class ImprovedBySynchronizedHashMapTest extends BaseHashMapTest {
 
 
     @Test
-    void shouldMissedElement_whenPutElementInMultipleThread() throws InterruptedException {
+    void shouldNotMissedElement_whenPutElementInMultipleThread() throws InterruptedException {
         HashMap<Integer, Integer> sharedMap = new ImprovedBySynchronizedHashMap<>();
 
         AtomicInteger aSequence = putElementInMultipleThread(sharedMap);
@@ -23,7 +23,7 @@ class ImprovedBySynchronizedHashMapTest extends BaseHashMapTest {
     }
 
     @Test
-    void shouldHasMisOverwrittenData_whenPutElementInMultipleThread() throws InterruptedException {
+    void shouldNotHasMisOverwrittenData_whenPutElementInMultipleThread() throws InterruptedException {
         HashMap<Integer, Integer> sharedMap = new ImprovedBySynchronizedHashMap<>();
 
         AtomicInteger aSequence = putElementInMultipleThread(sharedMap);
