@@ -1,41 +1,38 @@
 package org.jcj.ch5.performance;
 
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+import java.util.function.IntConsumer;
+import java.util.stream.Collectors;
 
 class TestHarnessTest {
 
-    static final int NUMBER_OF_THREAD = Runtime.getRuntime().availableProcessors() + 1;
-
-    static final int STEP = 10000;
-
     @ParameterizedTest
-    @MethodSource("tesMapPutPerformanceProvider")
-    public void tesMapPutPerformance(Map<UUID, Integer> mapUnderTest)
-            throws InterruptedException {
+    @ValueSource(ints = {100, 1000, 10000, 100000, 200000})
+    public void tesMapPutPerformance(int steps) {
+        Map<String, Long> performanceResult = PerformanceTest.hashMapInstanceProvider()
+                .collect(Collectors.toMap(
+                        mapUnderTest -> mapUnderTest.getClass().getSimpleName(),
+                        mapUnderTest -> multiInvokeTestHarness(idx -> mapUnderTest.put(UUID.randomUUID(), idx), steps
+                        )));
 
-        long duration = TestHarness.timeTasks(NUMBER_OF_THREAD, () -> {
-            IntStream.range(0, STEP).forEach(idx -> mapUnderTest.put(UUID.randomUUID(), idx));
-        });
+        System.out.printf("\n\rPerformance report of put()x[%,8d]\n\r", steps);
 
-        System.out.printf("Performance report of put() method - Class:[%18s], Duration:[%,d] \n",
-                mapUnderTest.getClass().getSimpleName(), duration);
+        performanceResult.forEach((key, value) ->
+                System.out.printf("Performance report of put()x[%,8d] - Class:[%18s], Duration:[%,16d] \n",
+                        steps, key, value));
     }
 
-    public static Stream<Map<UUID, Integer>> tesMapPutPerformanceProvider() {
-        return Stream.of(
-                new ConcurrentHashMap<>(),
-                new ImprovedHashMap<>(),
-                Collections.synchronizedMap(new HashMap<>())
-        );
+    private static long multiInvokeTestHarness(IntConsumer testFn, int steps) {
+        try {
+            return TestHarness.timeTasks(PerformanceTest.NUMBER_OF_THREAD, () ->
+                    PerformanceTest.multiInvoke(testFn, steps));
+        } catch (InterruptedException skipped) {
+            throw new RuntimeException(skipped);
+        }
     }
 
 }

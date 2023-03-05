@@ -11,6 +11,8 @@ repositories {
 
 dependencies {
     implementation 'net.jcip:jcip-annotations:1.0'
+    implementation 'org.openjdk.jmh:jmh-core:1.35'
+    implementation 'org.openjdk.jmh:jmh-generator-annprocess:1.35'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
