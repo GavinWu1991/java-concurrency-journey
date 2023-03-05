@@ -72,7 +72,7 @@ public class ImprovedHashMap<K, V> implements Map<K, V> {
     }
 
     @Override
-    public V get(Object key) {
-        throw new UnsupportedOperationException();
+    public synchronized V get(Object key) {
+        return innerMap.get(key);
     }
 }

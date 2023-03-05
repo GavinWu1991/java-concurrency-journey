@@ -9,8 +9,9 @@ import java.util.function.IntConsumer;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class PerformanceTest {
+public class PerformanceTestFixture {
 
+    // use N cpu + 1 thread to simulate the concurrency
     protected static final int NUMBER_OF_THREAD = Runtime.getRuntime().availableProcessors() + 1;
 
     static void multiInvoke(IntConsumer testFn, int steps) {

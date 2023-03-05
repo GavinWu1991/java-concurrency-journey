@@ -4,7 +4,7 @@ import java.util.concurrent.CountDownLatch;
 
 public class TestHarness {
 
-    private TestHarness(){
+    private TestHarness() {
         throw new UnsupportedOperationException();
     }
 

@@ -13,7 +13,7 @@ class TestHarnessTest {
     @ParameterizedTest
     @ValueSource(ints = {100, 1000, 10000, 100000, 200000})
     public void tesMapPutPerformance(int steps) {
-        Map<String, Long> performanceResult = PerformanceTest.hashMapInstanceProvider()
+        Map<String, Long> performanceResult = PerformanceTestFixture.hashMapInstanceProvider()
                 .collect(Collectors.toMap(
                         mapUnderTest -> mapUnderTest.getClass().getSimpleName(),
                         mapUnderTest -> multiInvokeTestHarness(idx -> mapUnderTest.put(UUID.randomUUID(), idx), steps
@@ -28,8 +28,9 @@ class TestHarnessTest {
 
     private static long multiInvokeTestHarness(IntConsumer testFn, int steps) {
         try {
-            return TestHarness.timeTasks(PerformanceTest.NUMBER_OF_THREAD, () ->
-                    PerformanceTest.multiInvoke(testFn, steps));
+            return TestHarness.timeTasks(
+                    PerformanceTestFixture.NUMBER_OF_THREAD,
+                    () -> PerformanceTestFixture.multiInvoke(testFn, steps));
         } catch (InterruptedException skipped) {
             throw new RuntimeException(skipped);
         }
