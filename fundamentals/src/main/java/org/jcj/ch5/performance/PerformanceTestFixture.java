@@ -12,14 +12,14 @@ import java.util.stream.Stream;
 public class PerformanceTestFixture {
 
     // use N cpu + 1 thread to simulate the concurrency
-    protected static final int NUMBER_OF_THREAD = Runtime.getRuntime().availableProcessors() + 1;
+    public static final int NUMBER_OF_THREAD = Runtime.getRuntime().availableProcessors() + 1;
 
-    static void multiInvoke(IntConsumer testFn, int steps) {
+    public static void multiInvoke(IntConsumer testFn, int steps) {
         IntStream.range(0, steps)
                 .forEach(testFn);
     }
 
-    static Stream<Map<UUID, Integer>> hashMapInstanceProvider() {
+    public static Stream<Map<UUID, Integer>> hashMapInstanceProvider() {
         return Stream.of(
                 new ConcurrentHashMap<>(),
                 new ImprovedHashMap<>(),
