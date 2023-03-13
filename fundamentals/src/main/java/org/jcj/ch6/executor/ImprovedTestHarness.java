@@ -3,14 +3,11 @@ package org.jcj.ch6.executor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class ImprovedTestHarness {
 
-    private final static Logger log = LogManager.getLogger(ImprovedTestHarness.class);
+    private static final Logger log = LogManager.getLogger(ImprovedTestHarness.class);
 
     private ImprovedTestHarness() {
         throw new UnsupportedOperationException();
@@ -19,9 +16,8 @@ public class ImprovedTestHarness {
     public static long timeTasks(int nThreads, final Runnable task)
             throws InterruptedException, BrokenBarrierException {
 
-        final CyclicBarrier cyclicBarrier = new CyclicBarrier(nThreads + 1, () -> {
-            log.debug("All test thread [{}] reach barrier.", nThreads);
-        });
+        final CyclicBarrier cyclicBarrier = new CyclicBarrier(nThreads + 1,
+                () -> log.debug("All test thread [{}] reach barrier.", nThreads));
 
         final Executor executor = Executors.newFixedThreadPool(nThreads);
 
