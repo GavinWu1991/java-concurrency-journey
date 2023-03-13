@@ -19,7 +19,7 @@ public class ImprovedTestHarness {
     public static long timeTasks(int nThreads, final Runnable task)
             throws InterruptedException, BrokenBarrierException {
 
-        final CyclicBarrier cyclicBarrier = new CyclicBarrier(nThreads, () -> {
+        final CyclicBarrier cyclicBarrier = new CyclicBarrier(nThreads + 1, () -> {
             log.debug("All test thread [{}] reach barrier.", nThreads);
         });
 
