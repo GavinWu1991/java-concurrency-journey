@@ -67,7 +67,6 @@ class ImprovedTestHarnessTest {
             try {
                 TimeUnit.SECONDS.sleep(timeout);
             } catch (InterruptedException ignored) {
-                log.warn(ignored);
             }
         }
     }

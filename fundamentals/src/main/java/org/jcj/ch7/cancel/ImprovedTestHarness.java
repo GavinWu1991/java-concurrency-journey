@@ -50,7 +50,6 @@ public class ImprovedTestHarness {
                         endBarrier.await();
                     }
                 } catch (InterruptedException | BrokenBarrierException ignored) {
-                    log.warn(ignored);
                 }
             });
         }
