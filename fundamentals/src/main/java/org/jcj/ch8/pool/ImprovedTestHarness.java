@@ -3,9 +3,7 @@ package org.jcj.ch8.pool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Executor;
+import java.util.concurrent.*;
 
 public class ImprovedTestHarness {
 
@@ -21,7 +19,7 @@ public class ImprovedTestHarness {
         final CyclicBarrier cyclicBarrier = new CyclicBarrier(nThreads + 1,
                 () -> log.debug("All test thread [{}] reach barrier.", nThreads));
 
-        final Executor executor = new TimingThreadPool(nThreads, shouldStartAllCoreThreads);
+        final ThreadPoolExecutor executor = new TimingThreadPool(nThreads, shouldStartAllCoreThreads);
 
         for (int i = 0; i < nThreads; i++) {
             executor.execute(() -> {
@@ -48,6 +46,10 @@ public class ImprovedTestHarness {
         cyclicBarrier.reset();
         cyclicBarrier.await();
         long end = System.nanoTime();
+
+        executor.shutdown();
+        executor.awaitTermination(1, TimeUnit.SECONDS);
+
         return end - start;
     }
 }
