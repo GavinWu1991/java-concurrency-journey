@@ -1,0 +1,86 @@
+2023-04-08 21:27:07
+Full thread dump OpenJDK 64-Bit Server VM (18.0.2+9-FR mixed mode, sharing):
+
+Threads class SMR info:
+_java_thread_list=0x0000600000f5c4a0, length=14, elements={
+0x00007ff28080ba00, 0x00007ff28000b000, 0x00007ff28300ae00, 0x00007ff28580fa00,
+0x00007ff281815800, 0x00007ff281808800, 0x00007ff281808e00, 0x00007ff281818000,
+0x00007ff284808200, 0x00007ff285810a00, 0x00007ff28087c800, 0x00007ff283041a00,
+0x00007ff28300a200, 0x00007ff2808a8200
+}
+
+"main" #1 prio=5 os_prio=31 cpu=522.40ms elapsed=40.71s tid=0x00007ff28080ba00 nid=5379 waiting on condition  [0x0000700006f65000]
+   java.lang.Thread.State: WAITING (parking)
+	at jdk.internal.misc.Unsafe.park(java.base@18.0.2/Native Method)
+	- parking to wait for  <0x000000070e800010> (a java.util.concurrent.FutureTask)
+	at java.util.concurrent.locks.LockSupport.park(java.base@18.0.2/LockSupport.java:211)
+	at java.util.concurrent.FutureTask.awaitDone(java.base@18.0.2/FutureTask.java:447)
+	at java.util.concurrent.FutureTask.get(java.base@18.0.2/FutureTask.java:190)
+	at java.util.concurrent.AbstractExecutorService.invokeAll(java.base@18.0.2/AbstractExecutorService.java:252)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo.execute(LeftRightDeadLockDemo.java:30)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo.main(LeftRightDeadLockDemo.java:22)
+
+   Locked ownable synchronizers:
+	- None
+
+"Task:rightToLeft" #16 prio=5 os_prio=31 cpu=4.73ms elapsed=40.10s tid=0x00007ff283041a00 nid=25347 waiting for monitor entry  [0x00007000082a1000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo.rightToLeft(LeftRightDeadLockDemo.java:41)
+	- waiting to lock <0x000000070e815878> (a java.lang.Object)
+	- locked <0x000000070e815888> (a java.lang.Object)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo$$Lambda$93/0x0000000800cc3630.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(java.base@18.0.2/FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@18.0.2/ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@18.0.2/ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(java.base@18.0.2/Thread.java:833)
+
+   Locked ownable synchronizers:
+	- <0x000000070e8159c8> (a java.util.concurrent.ThreadPoolExecutor$Worker)
+
+"Task:leftToRight" #17 prio=5 os_prio=31 cpu=3.32ms elapsed=40.10s tid=0x00007ff28300a200 nid=28675 waiting for monitor entry  [0x00007000083a4000]
+   java.lang.Thread.State: BLOCKED (on object monitor)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo.leftToRight(LeftRightDeadLockDemo.java:52)
+	- waiting to lock <0x000000070e815888> (a java.lang.Object)
+	- locked <0x000000070e815878> (a java.lang.Object)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo$$Lambda$94/0x0000000800cc3840.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(java.base@18.0.2/FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@18.0.2/ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@18.0.2/ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(java.base@18.0.2/Thread.java:833)
+
+   Locked ownable synchronizers:
+	- <0x000000070e80b040> (a java.util.concurrent.ThreadPoolExecutor$Worker)
+
+Found one Java-level deadlock:
+=============================
+"Task:rightToLeft":
+  waiting to lock monitor 0x0000600003404340 (object 0x000000070e815878, a java.lang.Object),
+  which is held by "Task:leftToRight"
+
+"Task:leftToRight":
+  waiting to lock monitor 0x0000600003410680 (object 0x000000070e815888, a java.lang.Object),
+  which is held by "Task:rightToLeft"
+
+Java stack information for the threads listed above:
+===================================================
+"Task:rightToLeft":
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo.rightToLeft(LeftRightDeadLockDemo.java:41)
+	- waiting to lock <0x000000070e815878> (a java.lang.Object)
+	- locked <0x000000070e815888> (a java.lang.Object)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo$$Lambda$93/0x0000000800cc3630.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(java.base@18.0.2/FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@18.0.2/ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@18.0.2/ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(java.base@18.0.2/Thread.java:833)
+"Task:leftToRight":
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo.leftToRight(LeftRightDeadLockDemo.java:52)
+	- waiting to lock <0x000000070e815888> (a java.lang.Object)
+	- locked <0x000000070e815878> (a java.lang.Object)
+	at org.jcj.ch10.deadlock.LeftRightDeadLockDemo$$Lambda$94/0x0000000800cc3840.call(Unknown Source)
+	at java.util.concurrent.FutureTask.run(java.base@18.0.2/FutureTask.java:264)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(java.base@18.0.2/ThreadPoolExecutor.java:1136)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(java.base@18.0.2/ThreadPoolExecutor.java:635)
+	at java.lang.Thread.run(java.base@18.0.2/Thread.java:833)
+
+Found 1 deadlock.
+

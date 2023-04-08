@@ -1,0 +1,32 @@
+"Task:leftToRight" prio=0 tid=0x0 nid=0x0 blocked
+     java.lang.Thread.State: BLOCKED
+ on java.lang.Object@68888c41 owned by "Task:rightToLeft" Id=16
+	at app//org.jcj.ch10.deadlock.LeftRightDeadLockDemo.leftToRight(LeftRightDeadLockDemo.java:52)
+	at app//org.jcj.ch10.deadlock.LeftRightDeadLockDemo$$Lambda$94/0x0000000800cc3840.call(Unknown Source)
+	at java.base@18.0.2/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@18.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base@18.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base@18.0.2/java.lang.Thread.run(Thread.java:833)
+
+"Task:rightToLeft" prio=0 tid=0x0 nid=0x0 blocked
+     java.lang.Thread.State: BLOCKED
+ on java.lang.Object@34d6129d owned by "Task:leftToRight" Id=17
+	at app//org.jcj.ch10.deadlock.LeftRightDeadLockDemo.rightToLeft(LeftRightDeadLockDemo.java:41)
+	at app//org.jcj.ch10.deadlock.LeftRightDeadLockDemo$$Lambda$93/0x0000000800cc3630.call(Unknown Source)
+	at java.base@18.0.2/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base@18.0.2/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base@18.0.2/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base@18.0.2/java.lang.Thread.run(Thread.java:833)
+
+"main" prio=0 tid=0x0 nid=0x0 waiting on condition
+     java.lang.Thread.State: WAITING
+ on java.util.concurrent.FutureTask@3f8c61cc
+	at java.base@18.0.2/jdk.internal.misc.Unsafe.park(Native Method)
+	at java.base@18.0.2/java.util.concurrent.locks.LockSupport.park(LockSupport.java:211)
+	at java.base@18.0.2/java.util.concurrent.FutureTask.awaitDone(FutureTask.java:447)
+	at java.base@18.0.2/java.util.concurrent.FutureTask.get(FutureTask.java:190)
+	at java.base@18.0.2/java.util.concurrent.AbstractExecutorService.invokeAll(AbstractExecutorService.java:252)
+	at app//org.jcj.ch10.deadlock.LeftRightDeadLockDemo.execute(LeftRightDeadLockDemo.java:30)
+	at app//org.jcj.ch10.deadlock.LeftRightDeadLockDemo.main(LeftRightDeadLockDemo.java:22)
+
+
