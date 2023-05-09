@@ -7,10 +7,10 @@ public class MultiThreadAddFruitTestCase extends JSR166TestCase {
 
     public MultiThreadAddFruitTestCase(Grocery grocery) {
         this.grocery = grocery;
-        setName("test");
+        setName("testMultiThreadAddFruitTestCase");
     }
 
-    public void test() throws InterruptedException {
+    public void testMultiThreadAddFruitTestCase() throws InterruptedException {
         SimpleThreadFactory simpleThreadFactory = new SimpleThreadFactory();
         Thread thread1 = simpleThreadFactory.newThread(() -> {
             for (int i = 0; i < 10000; i++) {

@@ -7,10 +7,10 @@ public class MultiThreadAddVegetableTestCase extends JSR166TestCase {
 
     public MultiThreadAddVegetableTestCase(Grocery grocery) {
         this.grocery = grocery;
-        setName("test");
+        setName("testMultiThreadAddVegetableTestCase");
     }
 
-    public void test() throws InterruptedException {
+    public void testMultiThreadAddVegetableTestCase() throws InterruptedException {
         SimpleThreadFactory simpleThreadFactory = new SimpleThreadFactory();
         Thread thread1 = simpleThreadFactory.newThread(() -> {
             for (int i = 0; i < 10000; i++) {
@@ -26,7 +26,7 @@ public class MultiThreadAddVegetableTestCase extends JSR166TestCase {
         thread2.start();
         thread1.join();
         thread2.join();
-        assertEquals(0, grocery.getFruits());
+        assertEquals(zero.intValue(), grocery.getFruits());
         assertEquals(20000, grocery.getVegetables());
     }
 }
