@@ -3,7 +3,7 @@ package org.jcj.ch11.performance;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-class CopyOnWriteGrocery implements Grocery {
+public class CopyOnWriteGrocery implements Grocery {
     private final List<String> fruits = new CopyOnWriteArrayList<>();
     private final List<String> vegetables = new CopyOnWriteArrayList<>();
 
@@ -13,5 +13,15 @@ class CopyOnWriteGrocery implements Grocery {
 
     public void addVegetable(int index, String vegetable) {
         vegetables.add(index, vegetable);
+    }
+
+    @Override
+    public int getFruits() {
+        return fruits.size();
+    }
+
+    @Override
+    public int getVegetables() {
+        return vegetables.size();
     }
 }

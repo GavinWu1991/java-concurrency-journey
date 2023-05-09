@@ -5,7 +5,7 @@ import net.jcip.annotations.GuardedBy;
 import java.util.ArrayList;
 import java.util.List;
 
-class FineGrainLockGrocery implements Grocery {
+public class FineGrainLockGrocery implements Grocery {
     @GuardedBy("fruits")
     private final List<String> fruits = new ArrayList<>();
 
@@ -21,6 +21,20 @@ class FineGrainLockGrocery implements Grocery {
     public void addVegetable(int index, String vegetable) {
         synchronized (vegetables) {
             vegetables.add(index, vegetable);
+        }
+    }
+
+    @Override
+    public int getFruits() {
+        synchronized (fruits) {
+            return fruits.size();
+        }
+    }
+
+    @Override
+    public int getVegetables() {
+        synchronized (vegetables) {
+            return vegetables.size();
         }
     }
 }

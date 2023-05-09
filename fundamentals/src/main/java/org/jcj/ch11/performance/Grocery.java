@@ -6,4 +6,8 @@ public interface Grocery {
 
     void addVegetable(int index, String vegetable);
 
+    int getFruits();
+
+    int getVegetables();
+
 }
