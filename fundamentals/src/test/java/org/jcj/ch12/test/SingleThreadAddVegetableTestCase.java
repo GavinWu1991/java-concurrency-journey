@@ -15,7 +15,7 @@ public class SingleThreadAddVegetableTestCase extends JSR166TestCase {
         for (int i = 0; i < vegetable; i++) {
             grocery.addVegetable(i, String.valueOf(i));
         }
-        assertEquals(zero.intValue(), grocery.getFruits());
-        assertEquals(vegetable, grocery.getVegetables());
+        threadAssertEquals(zero.intValue(), grocery.getFruits());
+        threadAssertEquals(vegetable, grocery.getVegetables());
     }
 }

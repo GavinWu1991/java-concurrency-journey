@@ -26,7 +26,7 @@ public class MultiThreadAddFruitTestCase extends JSR166TestCase {
         thread2.start();
         thread1.join();
         thread2.join();
-        assertEquals(20000, grocery.getFruits());
-        assertEquals(0, grocery.getVegetables());
+        threadAssertEquals(20000, grocery.getFruits());
+        threadAssertEquals(0, grocery.getVegetables());
     }
 }
